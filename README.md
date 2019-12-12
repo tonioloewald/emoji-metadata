@@ -15,18 +15,18 @@ emoji = []
     } else if (tr.firstChild.matches('.mediumhead')) {
       subcategory = tr.textContent
     } else if (tr.querySelector('td')) {
-    	try {
-    		const codeElt = tr.querySelector('.code')
-    		const charsElt = tr.querySelector('.chars')
-    		const nameElt = tr.querySelector('.name')
-		  emoji.push ({
-		  	code: codeElt.textContent,
-		  	chars: charsElt.textContent,
-		  	name: nameElt.textContent,
-		  })
-    	} catch(e) {
-    	  console.log({codeElt, charsElt, nameElt}, idx, e)
-    	}
+      try {
+        const codeElt = tr.querySelector('.code')
+        const charsElt = tr.querySelector('.chars')
+        const nameElt = tr.querySelector('.name')
+      emoji.push ({
+        code: codeElt.textContent,
+        chars: charsElt.textContent,
+        name: nameElt.textContent,
+      })
+      } catch(e) {
+        console.log({codeElt, charsElt, nameElt}, idx, e)
+      }
     }
   })
 w = window.open()
