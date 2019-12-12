@@ -33,3 +33,11 @@ w = window.open()
 w.document.body.innerHTML = `<pre>${JSON.stringify(emoji, false, 2)}</pre>`
 'done'
 ```
+
+## Usage
+
+You can get this package via [npm](https://www.npmjs.com/package/emoji-metadata) 
+
+    npm i emoji-metadata
+
+It's just a single json file in the package directory.
