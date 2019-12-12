@@ -1,8 +1,8 @@
 # Emoji Metadata
 
-The best source of truth for emoji is the [Unicode.org page](https://unicode.org/emoji/charts/full-emoji-list.html) but it doesn't provide category information.
+The best source of truth for emoji is the [Unicode.org page](https://unicode.org/emoji/charts/full-emoji-list.html).
 
-This data was obtained by running this code in the console on the aforementioned page.
+This data was obtained by running this code in the console on the aforementioned page. It infers categories and subcategories from the table subheadings on the page.
 
 ```
 category = ''
