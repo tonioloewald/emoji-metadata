@@ -1,6 +1,8 @@
 # Emoji Metadata
 ## Includes fully-qualified v15.0 emoji
 
+![31.1kB gzipped](https://deno.bundlejs.com/?q=emoji-metadata@1.0.1&treeshake=[*+as+emoji]&badge=)
+
 The best source of truth for emoji is the [latest Unicode.org emoji-test.txt](https://unicode.org/Public/emoji/latest/emoji-test.txt).
 
 The data is obtained via the `update` script (`updata-from-source.mjs`).
