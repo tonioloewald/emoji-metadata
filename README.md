@@ -1,7 +1,7 @@
 # Emoji Metadata
 ## Includes fully-qualified v15.0 emoji
 
-The best source of truth for emoji is the [Unicode.org text file](https://unicode.org/Public/emoji/latest/emoji-test.txt).
+The best source of truth for emoji is the [latest Unicode.org emoji-test.txt](https://unicode.org/Public/emoji/latest/emoji-test.txt).
 
 The data is obtained via the `update` script (`updata-from-source.mjs`).
 
