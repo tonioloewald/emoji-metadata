@@ -1,43 +1,103 @@
 # Emoji Metadata
 
-The best source of truth for emoji is the [Unicode.org page](https://unicode.org/emoji/charts/full-emoji-list.html).
+The best source of truth for emoji is the [Unicode.org text file](https://unicode.org/Public/emoji/latest/emoji-test.txt).
 
-This data was obtained by running this code in the console on the aforementioned page. It infers categories and subcategories from the table subheadings on the page.
+The data is obtained via the `update` script (`updata-from-source.mjs`).
 
-```
-category = ''
-subcategory = ''
-emoji = []
-;[...document.querySelectorAll('tr')]
-  .forEach((tr, idx) => {
-    if (tr.firstChild.matches('.bighead')) {
-      category = tr.textContent
-    } else if (tr.firstChild.matches('.mediumhead')) {
-      subcategory = tr.textContent
-    } else if (tr.querySelector('td')) {
-      try {
-        const codeElt = tr.querySelector('.code')
-        const charsElt = tr.querySelector('.chars')
-        const nameElt = tr.querySelector('.name')
-      emoji.push ({
-        code: codeElt.textContent,
-        chars: charsElt.textContent,
-        name: nameElt.textContent,
-      })
-      } catch(e) {
-        console.log({codeElt, charsElt, nameElt}, idx, e)
-      }
-    }
-  })
-w = window.open()
-w.document.body.innerHTML = `<pre>${JSON.stringify(emoji, false, 2)}</pre>`
-'done'
-```
+## Changes from v1.0
 
-## Usage
+Instead of `main` being set to `emoji-metadata.json` it is now set to the lighter-weight `emoji.js`.
 
-You can get this package via [npm](https://www.npmjs.com/package/emoji-metadata) 
+> Only `fully-qualified` emoji are included.
 
-    npm i emoji-metadata
+Four versions of the data are provided (and it should be easy to add more):
 
-It's just a single json file in the package directory.
+### emoji.js
+
+This is a simple array of emoji provided as an ES6 module.
+
+Usage:
+
+    import emoji from 'emoji-metadata'
+
+The data looks like this:
+
+    export default [
+      {
+        category: "Smileys & Emotion",
+        subcategory: "face-smiling",
+        chars: "😀",
+        name: "grinning face"
+      },
+      {
+        category: "Smileys & Emotion",
+        subcategory: "face-smiling",
+        chars: "😃",
+        name: "grinning face with big eyes"
+      },
+      ...
+    ]
+
+### emoji-groups.json
+
+This is a hierarchical structure of groups and subgroups.
+
+It looks like this:
+
+    [
+      {
+        "name": "Smileys & Emotion",
+        "subGroups": [
+          {
+            "name": "face-smiling",
+            "emoji": [
+              {
+                "codes": [
+                  "U+1F600"
+                ],
+                "chars": "😀",
+                "name": "grinning face"
+              },
+              ...
+            ]
+          },
+          ...
+        ],
+      },
+      ...
+    ]
+
+### emoji-metadata.json
+
+This is the same data as emoji-groups, but flattened.
+
+It looks like this:
+
+    [
+      {
+        "category": "Smileys & Emotion",
+        "subcategory": "face-smiling",
+        "codes": [
+          "U+1F600"
+        ],
+        "chars": "😀",
+        "name": "grinning face"
+      },
+      {
+        "category": "Smileys & Emotion",
+        "subcategory": "face-smiling",
+        "codes": [
+          "U+1F603"
+        ],
+        "chars": "😃",
+        "name": "grinning face with big eyes"
+      },
+      ...
+    ]
+
+The javascript version is obviously the most convenient to use. The hierarchical version
+is the most efficient (unless you don't want the codes), while emoji-metadata strikes
+a happy medium (and with on-the-fly compression is probably hardly larger than the
+hierarchical version).
+
+Finally, the version of the unicode data is stored in `emoji-version.json` in case that's helpful.
