@@ -1,4 +1,5 @@
 # Emoji Metadata
+## Includes fully-qualified v15.0 emoji
 
 The best source of truth for emoji is the [Unicode.org text file](https://unicode.org/Public/emoji/latest/emoji-test.txt).
 
